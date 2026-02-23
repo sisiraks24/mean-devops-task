@@ -1,1 +1,24 @@
+version: "3.8"
 
+services:
+  backend:
+    build: ./backend
+    container_name: mean-backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  frontend:
+    build: ./frontend
+    container_name: mean-frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+  mongo:
+    image: mongo:6
+    container_name: mean-mongo
+    ports:
+      - "27017:27017"
